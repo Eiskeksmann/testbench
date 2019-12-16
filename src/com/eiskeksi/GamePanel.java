@@ -2,6 +2,7 @@ package com.eiskeksi;
 
 import com.eiskeksi.util.KeyHandler;
 import com.eiskeksi.util.MouseHandler;
+import com.eiskeksi.states.GameStateManager;
 
 import javax.swing.JPanel;
 import java.awt.Dimension;
@@ -28,6 +29,8 @@ public class GamePanel extends JPanel implements Runnable{
     private MouseHandler mouse;
     private KeyHandler key;
 
+    private GameStateManager gsm;
+
     public GamePanel(int width, int height){
 
         this.width = width;
@@ -51,6 +54,11 @@ public class GamePanel extends JPanel implements Runnable{
         running = true;
         img = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_ARGB);
         g = (Graphics2D) img.getGraphics();
+
+        mouse = new MouseHandler();
+        key = new KeyHandler();
+
+        gsm = new GameStateManager();
     }
 
     public void run(){
@@ -134,11 +142,11 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void update(){
 
+        gsm.update();
     }
     public void input(MouseHandler mouse, KeyHandler key){
 
-
-
+        gsm.input(mouse, key);
     }
     public void render(float interpolation){
 
@@ -146,6 +154,7 @@ public class GamePanel extends JPanel implements Runnable{
 
             g.setColor(new Color(66,134,244));
             g.fillRect(0, 0, this.width, this.height);
+            gsm.render(g);
         }
     }
     public void draw(float interpolation){
