@@ -1,5 +1,7 @@
 package com.eiskeksi.util;
 
+import com.eiskeksi.GamePanel;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -11,6 +13,10 @@ public class KeyHandler implements KeyListener{
 
     public static List<Key> keys = new ArrayList<>();
 
+    public KeyHandler(GamePanel gpanel){
+
+        gpanel.addKeyListener(this);
+    }
     public class Key{
         public int presses, absorbs;
         public boolean down, clicked;
@@ -38,13 +44,75 @@ public class KeyHandler implements KeyListener{
             }
         }
     }
+
+    public Key up = new Key();
+    public Key down = new Key();
+    public Key left = new Key();
+    public Key right = new Key();
+    public Key attack = new Key();
+    public Key menu = new Key();
+    public Key enter = new Key();
+    public Key escape = new Key();
+
+    public void releaseAll(){
+        for(Key k : keys){
+            k.down = false;
+        }
+    }
+
+    public void tick(){
+
+        for(Key k : keys){
+            k.tick();
+        }
+    }
+
+    public void toggle(KeyEvent e, boolean pressed){
+
+        switch(e.getKeyCode()){
+
+            case(KeyEvent.VK_W):
+                up.toggle(pressed);
+                break;
+
+            case(KeyEvent.VK_A):
+                left.toggle(pressed);
+                break;
+
+            case(KeyEvent.VK_S):
+                down.toggle(pressed);
+                break;
+
+            case(KeyEvent.VK_D):
+                right.toggle(pressed);
+                break;
+
+            case(KeyEvent.VK_ENTER):
+                enter.toggle(pressed);
+                break;
+
+            case(KeyEvent.VK_X):
+                attack.toggle(pressed);
+                break;
+
+            case(KeyEvent.VK_ESCAPE):
+                escape.toggle(pressed);
+                break;
+
+            case(KeyEvent.VK_P):
+                menu.toggle(pressed);
+                break;
+        }
+    }
     public void keyTyped(KeyEvent e){
 
     }
     public void keyPressed(KeyEvent e){
 
+        toggle(e, true);
     }
     public void keyReleased(KeyEvent e){
 
+        toggle(e, false);
     }
 }

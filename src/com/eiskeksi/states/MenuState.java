@@ -5,9 +5,9 @@ import com.eiskeksi.util.MouseHandler;
 
 import java.awt.*;
 
-public class PlayState extends GameState{
+public class MenuState extends GameState{
 
-    public PlayState(GameStateManager gsm){
+    public MenuState(GameStateManager gsm){
         super(gsm);
     }
 
@@ -19,7 +19,5 @@ public class PlayState extends GameState{
     }
     public void render(Graphics2D g){
 
-        g.setColor(Color.RED);
-        g.fillRect(100, 100, 200, 200);
     }
 }
