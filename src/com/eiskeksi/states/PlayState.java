@@ -7,8 +7,12 @@ import java.awt.*;
 
 public class PlayState extends GameState{
 
+    private Font font;
+
     public PlayState(GameStateManager gsm){
+
         super(gsm);
+        font = new Font("/res/font/font.png", 16, 16);
     }
 
     public void update(){
@@ -19,7 +23,5 @@ public class PlayState extends GameState{
     }
     public void render(Graphics2D g){
 
-        g.setColor(Color.RED);
-        g.fillRect(100, 100, 200, 200);
     }
 }
