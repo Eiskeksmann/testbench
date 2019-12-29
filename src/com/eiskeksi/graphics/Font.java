@@ -15,8 +15,8 @@ public class Font {
     private final int TILE_SIZE = 32;
     public int w;
     public int h;
-    private int wLetter;
-    private int hLetter;
+    private final int wLetter = 8;
+    private final int hLetter = 8;
 
     public Font(String file){
 
@@ -26,8 +26,6 @@ public class Font {
         System.out.println("Loading" + file + "...");
         FONTSHEET = loadFont(file);
 
-        wLetter = FONTSHEET.getWidth() / w;
-        hLetter = FONTSHEET.getHeight() / h;
         loadFontArray();
     }
 
@@ -39,8 +37,6 @@ public class Font {
         System.out.println("Loading" + file + "...");
         FONTSHEET = loadFont(file);
 
-        wLetter = FONTSHEET.getWidth() / w;
-        hLetter = FONTSHEET.getHeight() / h;
         loadFontArray();
     }
 
@@ -51,11 +47,9 @@ public class Font {
     }
     public void setWidth(int w){
         this.w = w;
-        wLetter = FONTSHEET.getWidth() / w;
     }
     public void setHeight(int h){
         this.h = h;
-        hLetter = FONTSHEET.getHeight() / h;
     }
 
     public int getWidth(){ return w;}
@@ -96,8 +90,8 @@ public class Font {
 
         int value = letter;
 
-        int x = value % 8;
-        int y = value / 8;
+        int x = value % wLetter;
+        int y = value / hLetter;
         return getLetter(x, y);
     }
 
@@ -106,13 +100,9 @@ public class Font {
         float y = pos.y;
 
         for(int i  = 0; i < word.length(); i++){
-            if(word.charAt(i) != 32){
-                g.drawImage(f.getFont(word.charAt(i)), (int) x, (int) y, width, height, null);
-            }
-
+            g.drawImage(f.getFont(word.charAt(i)), (int) x, (int) y, width, height, null);
             x+= xoffset;
             y+= yoffset;
-
         }
     }
 }

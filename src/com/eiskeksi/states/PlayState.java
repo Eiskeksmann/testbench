@@ -25,6 +25,6 @@ public class PlayState extends GameState{
     }
     public void render(Graphics2D g){
 
-       Font.drawArray(g, font, "DIES ist EIN Leerzeichen TeSt", new Vector2f(16, 16), 16, 16, 8, 0);
+       Font.drawArray(g, font, "test", new Vector2f(16, 16), 16, 16, 4, 0);
     }
 }
