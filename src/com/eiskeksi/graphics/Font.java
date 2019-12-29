@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Font {
 
     private BufferedImage FONTSHEET = null;
-    private BufferedImage[][] spriteArray;
+    private BufferedImage[][] fontArray;
     private final int TILE_SIZE = 32;
     public int w;
     public int h;
@@ -67,7 +67,6 @@ public class Font {
         try{
 
             font = ImageIO.read(getClass().getClassLoader().getResourceAsStream(file));
-            System.out.println(getClass().getClassLoader().getResourceAsStream(file));
         }
         catch(Exception e){
             System.out.println("ERROR: couldnt load file:" +  file);
@@ -76,12 +75,12 @@ public class Font {
     }
     public void loadFontArray(){
 
-        spriteArray = new BufferedImage[wLetter][hLetter];
+        fontArray = new BufferedImage[wLetter][hLetter];
 
         for(int x =  0; x < wLetter; x++){
 
             for(int y = 0; y < hLetter; y++){
-                spriteArray[x][y] = getLetter(x, y);
+                fontArray[x][y] = getLetter(x, y);
             }
         }
 
@@ -94,11 +93,26 @@ public class Font {
     }
 
     public BufferedImage getFont(char letter){
+
         int value = letter;
 
-        int x = value % wLetter;
-        int y = value / hLetter;
+        int x = value % 8;
+        int y = value / 8;
+        return getLetter(x, y);
+    }
 
-        return FONTSHEET.getSubimage(x, y, w, h);
+    public static void drawArray(Graphics2D g, Font f, String word, Vector2f pos, int width, int height, int xoffset, int yoffset){
+        float x = pos.x;
+        float y = pos.y;
+
+        for(int i  = 0; i < word.length(); i++){
+            if(word.charAt(i) != 32){
+                g.drawImage(f.getFont(word.charAt(i)), (int) x, (int) y, width, height, null);
+            }
+
+            x+= xoffset;
+            y+= yoffset;
+
+        }
     }
 }

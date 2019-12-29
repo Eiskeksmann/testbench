@@ -121,13 +121,13 @@ public class Sprite {
 
         for(int i  = 0; i < word.length(); i++){
             if(word.charAt(i) != 32){
-                //g.drawImage(f.getFont(word.charAt(i)), (int) x, (int) y, width, height, null);
-            }
+               g.drawImage(f.getFont(word.charAt(i)), (int) x, (int) y, width, height, null);
+           }
 
             x+= xoffset;
             y+= xoffset;
 
         }
-    }
+     }
 
 }
