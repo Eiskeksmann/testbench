@@ -67,7 +67,7 @@ public class Font {
         try{
 
             font = ImageIO.read(getClass().getClassLoader().getResourceAsStream(file));
-
+            System.out.println(getClass().getClassLoader().getResourceAsStream(file));
         }
         catch(Exception e){
             System.out.println("ERROR: couldnt load file:" +  file);

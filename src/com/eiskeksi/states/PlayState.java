@@ -1,5 +1,4 @@
 package com.eiskeksi.states;
-
 import com.eiskeksi.util.KeyHandler;
 import com.eiskeksi.util.MouseHandler;
 
@@ -12,7 +11,7 @@ public class PlayState extends GameState{
     public PlayState(GameStateManager gsm){
 
         super(gsm);
-        font = new Font("/res/font/font.png", 16, 16);
+        font = new Font("/res/font/transparent_font.png", 16, 16);
     }
 
     public void update(){
