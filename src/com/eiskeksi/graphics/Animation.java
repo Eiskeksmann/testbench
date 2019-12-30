@@ -36,15 +36,15 @@ public class Animation {
     public void setDelay(int set){
         delay = set;
     }
-    public void setFrames(int set){
-        cframe = set;
+    public void setFrames(BufferedImage[] frames){
+        this.frames = frames;
     }
     public void setNframes(int set){
         nframes = set;
     }
 
 
-    public void Update(){
+    public void update(){
         if(delay == -1) return;
 
         count++;
