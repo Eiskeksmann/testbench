@@ -1,17 +1,23 @@
 package com.eiskeksi.util;
 
+import com.eiskeksi.entitiy.Entity;
+import com.eiskeksi.logic.Direction;
+import gherkin.lexer.En;
+
+import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class CircHitBox extends HitBox{
 
     private float r;
-    private DirSkeletton dsk;
 
     public CircHitBox(Vector2f pos, float r){
 
         super.pos = pos;
         this.r = r;
-        this.dsk = new DirSkeletton(pos, r);
+        super.dsk = new DirSkeletton(pos, r);
+        super.col = new ArrayList<>(dsk.getNesw());
     }
     @Override
     protected boolean collide(HitBox col) {
@@ -26,24 +32,8 @@ public class CircHitBox extends HitBox{
     }
     @Override
     protected ArrayList<Vector2f> getCollisionPoint(String dir){
-
-        ArrayList<Vector2f> col = new ArrayList<>();
-        // 7 - 0 - 1
-        // - - - - -
-        // 6 - x - 2
-        // - - - - -
-        // 5 - 4 - 3
-        switch(dir){
-
-            case("NORTH"):
-                // col.add(); // 6
-                // col.add(); // 7
-                // col.add(); // 0
-                // col.add(); // 1
-                // col.add(); // 2
-                return null;
-        }
-        return null;
+        super.col = super.dsk.getNesw();
+        return super.col;
     }
 
     @Override
@@ -69,12 +59,13 @@ public class CircHitBox extends HitBox{
         super.pos = pos;
     }
     protected void update(){
-        dsk.setPos(pos);
+        super.dsk.update(super.pos);
     }
     protected void input(MouseHandler mouse, KeyHandler key){
 
     }
-    protected void render(){
+    protected void render(Graphics2D g, float interpolation){
 
+        //TODO Visualize Hitboxes for Test Purposes
     }
 }

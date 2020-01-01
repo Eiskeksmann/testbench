@@ -18,7 +18,7 @@ public class GameStateManager {
     public static final int PLAY = 0;
     public static final int MENU = 1;
     public static final int PAUSE = 2;
-    public static final int GAMEOVER = 3;
+    public static final int GOVER = 3;
 
 
     public GameStateManager(){
@@ -50,13 +50,13 @@ public class GameStateManager {
                 states.add(new PauseState(this));
                 break;
 
-            case(GAMEOVER):
+            case(GOVER):
                 states.add(new GameOverState(this));
                 break;
         }
     }
     public void addAndPop(int state){
-        states.remove(0);
+        states.clear();
         add(state);
     }
 
@@ -74,10 +74,10 @@ public class GameStateManager {
             s.input(mouse, key);
         }
     }
-    public void render(Graphics2D g){
+    public void render(Graphics2D g, float interpolation){
 
         for (GameState s : states) {
-            s.render(g);
+            s.render(g ,interpolation);
         }
     }
 }

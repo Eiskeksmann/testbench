@@ -54,7 +54,7 @@ public class GamePanel extends JPanel implements Runnable{
         running = true;
         img = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_ARGB);
         g = (Graphics2D) img.getGraphics();
-
+        //g.scale(8.0,8.0);
         mouse = new MouseHandler(this);
         key = new KeyHandler(this);
 
@@ -152,9 +152,9 @@ public class GamePanel extends JPanel implements Runnable{
 
         if(g != null){
 
-            g.setColor(new Color(66,134,244));
+            g.setColor(new Color(57,255,20));
             g.fillRect(0, 0, this.width, this.height);
-            gsm.render(g);
+            gsm.render(g, interpolation);
         }
     }
     public void draw(float interpolation){

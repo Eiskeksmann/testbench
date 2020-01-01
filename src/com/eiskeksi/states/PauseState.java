@@ -17,7 +17,7 @@ public class PauseState extends GameState{
     public void input(MouseHandler mouse, KeyHandler key){
 
     }
-    public void render(Graphics2D g){
+    public void render(Graphics2D g, float interpolation){
 
     }
 }

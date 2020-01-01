@@ -2,6 +2,7 @@ package com.eiskeksi.util;
 
 import com.eiskeksi.logic.Direction;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DirSkeletton {
@@ -10,6 +11,8 @@ public class DirSkeletton {
     ArrayList<Vector2f> nesw;
     String id;
 
+    boolean idle;
+
     float r;
     float w;
     float h;
@@ -17,6 +20,7 @@ public class DirSkeletton {
     public DirSkeletton(Vector2f pos, float r){
 
         id = "CIRC";
+        idle = true;
         this.r = r;
         this.pos = pos;
         nesw = new ArrayList<>();
@@ -25,6 +29,7 @@ public class DirSkeletton {
     public DirSkeletton(Vector2f pos, float w, float h){
 
         id = "RECT";
+        idle = true;
         this.w = w;
         this.h = h;
         this.pos = pos;
@@ -85,4 +90,30 @@ public class DirSkeletton {
 
         return nesw.get(Direction.translateDir(dir));
     }
+    public ArrayList<Vector2f> getNesw(){
+
+        return nesw;
+    }
+
+    //Routine
+    public void update(Vector2f pos){
+
+        if(!idle) {
+            this.pos = pos;
+            initSkeletton();
+        }
+    }
+    public void input(MouseHandler mouse, KeyHandler key){
+
+    }
+    public void render(float interpolation){
+        //only for test purposes
+    }
+
+    //TODO MOUSE CLICKS ON THIS HITBOX --> RETURN TRUE
+    public boolean getSelected(){
+
+        return false;
+    }
+
 }

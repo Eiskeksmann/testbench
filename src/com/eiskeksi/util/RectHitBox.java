@@ -1,5 +1,6 @@
 package com.eiskeksi.util;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class RectHitBox extends HitBox {
@@ -13,6 +14,8 @@ public class RectHitBox extends HitBox {
         super.pos = pos;
         this.w = w;
         this.h = h;
+        super.dsk = new DirSkeletton(pos, this.w, this.h);
+        super.col = new ArrayList<>(dsk.getNesw());
     }
     @Override
     protected boolean collide(HitBox col) {
@@ -35,7 +38,8 @@ public class RectHitBox extends HitBox {
 
     @Override
     protected ArrayList<Vector2f> getCollisionPoint(String dir) {
-        return null;
+        super.col = super.dsk.getNesw();
+        return super.col;
     }
 
     @Override
@@ -56,6 +60,7 @@ public class RectHitBox extends HitBox {
     @Override
     protected void update() {
 
+        super.dsk.update(super.pos);
     }
 
     @Override
@@ -64,7 +69,8 @@ public class RectHitBox extends HitBox {
     }
 
     @Override
-    protected void render() {
+    protected void render(Graphics2D g, float interpolation) {
 
+        g.drawRect((int)super.pos.x, (int)super.pos.y, (int)this.w, (int)this.h);
     }
 }

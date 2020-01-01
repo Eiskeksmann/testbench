@@ -3,22 +3,22 @@ package com.eiskeksi.entitiy;
 import com.eiskeksi.graphics.Animation;
 import com.eiskeksi.graphics.Sprite;
 import com.eiskeksi.logic.Direction;
-import com.eiskeksi.util.KeyHandler;
-import com.eiskeksi.util.MouseHandler;
-import com.eiskeksi.util.Vector2f;
+import com.eiskeksi.util.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public abstract class Entity {
 
-    private Sprite sprite;
-    private Vector2f origin;
-    private int size;
+    protected Sprite spr_idl;
+    protected Sprite spr_mov;
+    protected Vector2f pos;
+    protected int size;
 
-    private Animation ani;
-
-    Direction dir;
+    protected Animation ani;
+    protected Direction dir;
+    protected RectHitBox rhb;
+    protected CircHitBox chb;
 
     protected float dx;
     protected float dy;
@@ -26,17 +26,6 @@ public abstract class Entity {
     protected float maxspeed;
     protected float acc;
     protected float deacc;
-
-    public Entity(Sprite sprite, Vector2f origin, int size){
-
-        this.sprite = sprite;
-        this.origin = origin;
-        this.size = size;
-        this.ani = new Animation();
-        dir = new Direction();
-
-        //initAnimation(RIGHT, sprite.getSpriteArray(RIGHT), 10);
-    }
 
     public void initAnimation(String current, BufferedImage[] frames, int delay){
 
@@ -52,78 +41,70 @@ public abstract class Entity {
     public void animate(){
 
         String mov;
-        if(dir.isMovingN()){
-            mov = Direction.N();
-            if(!dir.isHeading().equals(dir.isMovingN()) || ani.getDelay() == -1){
-                dir.setHeading(mov);
-                initAnimation(mov, sprite.getSpriteArray(Direction.translateDir(mov)), 5);
-            }
-        }
-
         switch(dir.isHeading()){
 
             case("NORTH"):
                 mov = Direction.N();
                 if(!dir.isHeading().equals(dir.isMovingN()) || ani.getDelay() == -1){
                     dir.setMoveN(true);
-                    initAnimation(mov, sprite.getSpriteArray(Direction.translateDir(mov)), 5);
+                    initAnimation(mov, spr_mov.getSpriteArray(Direction.translateDir(mov)), 5);
                 }
-                break;
+                return;
             case("NORTHEAST"):
                 mov = Direction.NE();
                 if(!dir.isHeading().equals(dir.isMovingNE()) || ani.getDelay() == -1){
                     dir.setMoveNE(true);
-                    initAnimation(mov, sprite.getSpriteArray(Direction.translateDir(mov)), 5);
+                    initAnimation(mov, spr_mov.getSpriteArray(Direction.translateDir(mov)), 5);
                 }
-                break;
+                return;
 
             case("EAST"):
                 mov = Direction.E();
                 if(!dir.isHeading().equals(dir.isMovingE()) || ani.getDelay() == -1){
                     dir.setMoveE(true);
-                    initAnimation(mov, sprite.getSpriteArray(Direction.translateDir(mov)), 5);
+                    initAnimation(mov, spr_mov.getSpriteArray(Direction.translateDir(mov)), 5);
                 }
-                break;
+                return;
 
             case("SOUTHEAST"):
                 mov = Direction.SE();
                 if(!dir.isHeading().equals(dir.isMovingSE()) || ani.getDelay() == -1){
                     dir.setMoveSE(true);
-                    initAnimation(mov, sprite.getSpriteArray(Direction.translateDir(mov)), 5);
+                    initAnimation(mov, spr_mov.getSpriteArray(Direction.translateDir(mov)), 5);
                 }
-                break;
+                return;
 
             case("SOUTH"):
                 mov = Direction.S();
                 if(!dir.isHeading().equals(dir.isMovingS()) || ani.getDelay() == -1){
                     dir.setMoveS(true);
-                    initAnimation(mov, sprite.getSpriteArray(Direction.translateDir(mov)), 5);
+                    initAnimation(mov, spr_mov.getSpriteArray(Direction.translateDir(mov)), 5);
                 }
-                break;
+                return;
 
             case("SOUTHWEST"):
                 mov = Direction.SW();
                 if(!dir.isHeading().equals(dir.isMovingSW()) || ani.getDelay() == -1){
                     dir.setMoveSW(true);
-                    initAnimation(mov, sprite.getSpriteArray(Direction.translateDir(mov)), 5);
+                    initAnimation(mov, spr_mov.getSpriteArray(Direction.translateDir(mov)), 5);
                 }
-                break;
+                return;
 
             case("WEST"):
                 mov = Direction.W();
                 if(!dir.isHeading().equals(dir.isMovingW()) || ani.getDelay() == -1){
                     dir.setMoveW(true);
-                    initAnimation(mov, sprite.getSpriteArray(Direction.translateDir(mov)), 5);
+                    initAnimation(mov, spr_mov.getSpriteArray(Direction.translateDir(mov)), 5);
                 }
-                break;
+                return;
 
             case("NORTHWEST"):
                 mov = Direction.NW();
                 if(!dir.isHeading().equals(dir.isMovingNW()) || ani.getDelay() == -1){
                     dir.setMoveNW(true);
-                    initAnimation(mov, sprite.getSpriteArray(Direction.translateDir(mov)), 5);
+                    initAnimation(mov, spr_mov.getSpriteArray(Direction.translateDir(mov)), 5);
                 }
-                break;
+                return;
         }
 
     }
@@ -132,7 +113,6 @@ public abstract class Entity {
 
         //TODO: CREATE HITBOX DETECTION
         animate();
-        //setHitBoxDirection();
         ani.update();
     }
     public abstract void render(Graphics2D g);

@@ -1,10 +1,13 @@
 package com.eiskeksi.graphics;
 
+import com.eiskeksi.logic.Direction;
 import com.eiskeksi.util.Vector2f;
+import gherkin.lexer.Ar;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.Array;
 import java.nio.Buffer;
 import java.util.ArrayList;
 
@@ -98,6 +101,19 @@ public class Sprite {
     public BufferedImage[][] getSpriteArray2(){
         return spriteArray;
     }
+    public ArrayList<BufferedImage> getAniCol(String column){
+
+        ArrayList<BufferedImage> ret = new ArrayList<>();
+        for(int i = 0; i < 8; i++){
+            ret.add(this.getSprite(Direction.translateDir(column), i));
+        }
+        return ret;
+    }
+    public static void drawSprite(Graphics2D g, Sprite spr, int xsh, int ysh,
+                                  int xpo, int ypo, int w, int h){
+
+        g.drawImage(spr.getSprite(xsh, ysh), xpo, ypo, w, h, null);
+    }
     public static void drawArray(Graphics2D g, ArrayList<BufferedImage> img,
                                  Vector2f pos, int width, int height,
                                  int xoffset, int yoffset){
@@ -115,17 +131,15 @@ public class Sprite {
         }
     }
 
-    public static void drawArray(Graphics2D g, Font f, String word, Vector2f pos, int width, int height, int xoffset, int yoffset){
+    public static void drawArray(Graphics2D g, Sprite s, String word, Vector2f pos, int width, int height, int xoffset, int yoffset){
         float x = pos.x;
         float y = pos.y;
 
         for(int i  = 0; i < word.length(); i++){
-            if(word.charAt(i) != 32){
-               g.drawImage(f.getFont(word.charAt(i)), (int) x, (int) y, width, height, null);
-           }
 
+            g.drawImage(s.getSprite((int) x, (int) y), width, height, null);
             x+= xoffset;
-            y+= xoffset;
+            y+= yoffset;
 
         }
      }
