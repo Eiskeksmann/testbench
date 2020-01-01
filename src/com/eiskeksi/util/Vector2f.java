@@ -25,8 +25,11 @@ public class Vector2f {
     public void addX(float f){ x+= f; }
     public void addY(float f){ y+= f; }
 
-    public void setX(float f){ this.x = f; }
-    public void setY(float f) {this.y = f;}
+    public void subX(float f){ x-= f;}
+    public void subY(float f){ y-= f;}
+
+    public void setX(float f){ this.x = f;}
+    public void setY(float f){ this.y = f;}
 
     public void setVector(Vector2f vec){
         this.x = vec.x;
