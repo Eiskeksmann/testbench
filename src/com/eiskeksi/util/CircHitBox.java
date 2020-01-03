@@ -58,13 +58,13 @@ public class CircHitBox extends HitBox{
 
         super.pos = pos;
     }
-    protected void update(){
+    public void update(){
         super.dsk.update(super.pos);
     }
-    protected void input(MouseHandler mouse, KeyHandler key){
+    public void input(MouseHandler mouse, KeyHandler key){
 
     }
-    protected void render(Graphics2D g, float interpolation){
+    public void render(Graphics2D g, float interpolation){
 
         //TODO Visualize Hitboxes for Test Purposes
     }

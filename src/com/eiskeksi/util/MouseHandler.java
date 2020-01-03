@@ -2,7 +2,9 @@ package com.eiskeksi.util;
 
 import com.eiskeksi.GamePanel;
 import com.eiskeksi.Window;
+import com.eiskeksi.tiles.Map;
 
+import javax.sound.midi.SysexMessage;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -12,18 +14,15 @@ public class MouseHandler implements MouseListener, MouseMotionListener, MouseWh
     private static int mouseY = -1;
     private static int mouseB = -1;
 
-    private static double precX = -1.0;
-    private static double precY = -1.0;
-
     private static RayTrace2D ray = null;
 
-    public MouseHandler(GamePanel gpanel){
-        gpanel.addMouseListener(this);
-        gpanel.addMouseMotionListener(this);
-        gpanel.addMouseWheelListener(this);
+    public MouseHandler(GamePanel game){
+        game.addMouseListener(this);
+        game.addMouseMotionListener(this);
+        game.addMouseWheelListener(this);
     }
 
-    public int getx(){
+    public int getX(){
         return mouseX;
     }
     public int getY(){
@@ -32,18 +31,18 @@ public class MouseHandler implements MouseListener, MouseMotionListener, MouseWh
     public int getButton(){
         return mouseB;
     }
-    public double getPrecX(){
-        return precX;
+
+    public RayTrace2D getRay(){
+        return ray;
     }
-    public double getPrecY(){
-        return precY;
-    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        precX = e.getLocationOnScreen().getLocation().getX();
-        precY = e.getLocationOnScreen().getLocation().getY();
-        ray = new RayTrace2D(new Vector2f((float)precX, (float)precY));
+        mouseX = e.getX();
+        mouseY = e.getY();
+        ray = new RayTrace2D(mouseX, mouseY);
+        System.out.println("Click X:" + e.getX() + "Click Y:" + e.getY());
     }
 
     @Override
@@ -65,6 +64,7 @@ public class MouseHandler implements MouseListener, MouseMotionListener, MouseWh
     @Override
     public void mouseExited(MouseEvent e) {
 
+        System.out.println("I CANT EXIT RIGFHT ? " + e.getX() +" | "+ e.getY());
     }
 
     @Override

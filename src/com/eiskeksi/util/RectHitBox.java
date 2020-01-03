@@ -1,5 +1,8 @@
 package com.eiskeksi.util;
 
+import com.eiskeksi.entitiy.Entity;
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -16,6 +19,12 @@ public class RectHitBox extends HitBox {
         this.h = h;
         super.dsk = new DirSkeletton(pos, this.w, this.h);
         super.col = new ArrayList<>(dsk.getNesw());
+    }
+
+    public RectHitBox(Entity ent){
+
+        //TODO: INITIATE HITBOX PREFFERED TO ENTITY VALUES
+        super.ent = ent;
     }
     @Override
     protected boolean collide(HitBox col) {
@@ -58,19 +67,29 @@ public class RectHitBox extends HitBox {
     }
 
     @Override
-    protected void update() {
+    public void update() {
 
         super.dsk.update(super.pos);
     }
 
     @Override
-    protected void input(MouseHandler mouse, KeyHandler key) {
+    public void input(MouseHandler mouse, KeyHandler key) {
 
     }
 
     @Override
-    protected void render(Graphics2D g, float interpolation) {
+    public void render(Graphics2D g, float interpolation) {
 
-        g.drawRect((int)super.pos.x, (int)super.pos.y, (int)this.w, (int)this.h);
+        if(super.isGetSelected()){
+
+            g.setColor(new Color(0,0,255));
+        }
+        else{
+            g.setColor(new Color(255,0,0));
+        }
+
+        g.drawRect(((int)super.pos.x  - Constant.SCALE * Constant.SCALE / 2)/ Constant.SCALE,
+                ((int)super.pos.y  - Constant.SCALE * Constant.SCALE  / 2)/ Constant.SCALE,
+                (int)this.w, (int)this.h);
     }
 }

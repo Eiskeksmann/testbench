@@ -115,7 +115,7 @@ public abstract class Entity {
         animate();
         ani.update();
     }
-    public abstract void render(Graphics2D g);
+    public abstract void render(Graphics2D g, float interpolation);
     public void input(KeyHandler key, MouseHandler mouse){
 
     }

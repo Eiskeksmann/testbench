@@ -7,9 +7,18 @@ import java.util.ArrayList;
 
 public abstract class HitBox {
 
+    protected Entity ent;
     protected Vector2f pos;
     protected DirSkeletton dsk;
     protected ArrayList<Vector2f> col;
+    protected boolean getSelected;
+
+    public boolean isGetSelected(){
+        return getSelected;
+    }
+    public void setGetSelected(boolean set){
+        getSelected = set;
+    }
 
     protected abstract boolean collide(HitBox col);
     protected abstract double calcSize();
@@ -20,7 +29,7 @@ public abstract class HitBox {
     protected abstract Vector2f getPos();
     protected abstract void setPos(Vector2f pos);
 
-    protected abstract void update();
-    protected abstract void input(MouseHandler mouse, KeyHandler key);
-    protected abstract void render(Graphics2D g, float interpolation);
+    public abstract void update();
+    public abstract void input(MouseHandler mouse, KeyHandler key);
+    public abstract void render(Graphics2D g, float interpolation);
 }

@@ -54,7 +54,7 @@ public class GamePanel extends JPanel implements Runnable{
         running = true;
         img = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_ARGB);
         g = (Graphics2D) img.getGraphics();
-        //g.scale(8.0,8.0);
+        g.scale(8.0,8.0);
         mouse = new MouseHandler(this);
         key = new KeyHandler(this);
 

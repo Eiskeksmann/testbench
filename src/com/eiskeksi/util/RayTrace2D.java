@@ -5,11 +5,13 @@ import java.util.ArrayList;
 public class RayTrace2D {
 
     private ArrayList<HitBox> hit;
-    Vector2f pos;
+    private int x;
+    private int y;
 
-    public RayTrace2D(Vector2f pos){
+    public RayTrace2D(int x, int y){
 
-        this.pos = pos;
+        this.x = x;
+        this.y = y;
     }
 
     public ArrayList<HitBox> getHit(){
