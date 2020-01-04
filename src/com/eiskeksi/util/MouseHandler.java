@@ -1,11 +1,7 @@
 package com.eiskeksi.util;
 
 import com.eiskeksi.GamePanel;
-import com.eiskeksi.Window;
-import com.eiskeksi.tiles.Map;
 
-import javax.sound.midi.SysexMessage;
-import java.awt.*;
 import java.awt.event.*;
 
 public class MouseHandler implements MouseListener, MouseMotionListener, MouseWheelListener {

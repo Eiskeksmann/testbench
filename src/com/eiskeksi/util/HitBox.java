@@ -1,6 +1,7 @@
 package com.eiskeksi.util;
 
 import com.eiskeksi.entitiy.Entity;
+import com.eiskeksi.logic.Grid;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -8,9 +9,9 @@ import java.util.ArrayList;
 public abstract class HitBox {
 
     protected Entity ent;
-    protected Vector2f pos;
+    protected Grid pos;
     protected DirSkeletton dsk;
-    protected ArrayList<Vector2f> col;
+    protected ArrayList<Grid> col;
     protected boolean getSelected;
 
     public boolean isGetSelected(){
@@ -23,11 +24,11 @@ public abstract class HitBox {
     protected abstract boolean collide(HitBox col);
     protected abstract double calcSize();
     protected abstract double calcPerimeter();
-    protected abstract ArrayList<Vector2f> getCollisionPoint(String dir);
+    protected abstract ArrayList<Grid> getCollisionPoint(String dir);
 
     protected abstract boolean getSelected();
-    protected abstract Vector2f getPos();
-    protected abstract void setPos(Vector2f pos);
+    protected abstract Grid getPos();
+    protected abstract void setPos(Grid pos);
 
     public abstract void update();
     public abstract void input(MouseHandler mouse, KeyHandler key);

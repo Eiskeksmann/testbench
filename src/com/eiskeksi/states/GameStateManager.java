@@ -4,8 +4,11 @@ import com.eiskeksi.GamePanel;
 import com.eiskeksi.util.KeyHandler;
 import com.eiskeksi.util.MouseHandler;
 import com.eiskeksi.util.Vector2f;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.Graphics2D;
+import java.io.IOException;
 import java.rmi.activation.ActivationGroup_Stub;
 import java.util.ArrayList;
 
@@ -21,7 +24,7 @@ public class GameStateManager {
     public static final int GOVER = 3;
 
 
-    public GameStateManager(){
+    public GameStateManager() throws ParserConfigurationException, SAXException, IOException {
 
         map = new Vector2f(GamePanel.width, GamePanel.height);
         Vector2f.setWorldVar(map.x, map.y);
@@ -34,7 +37,7 @@ public class GameStateManager {
 
         states.remove(state);
     }
-    public void add(int state){
+    public void add(int state) throws ParserConfigurationException, SAXException, IOException {
 
         switch(state){
 
@@ -55,7 +58,7 @@ public class GameStateManager {
                 break;
         }
     }
-    public void addAndPop(int state){
+    public void addAndPop(int state) throws IOException, SAXException, ParserConfigurationException {
         states.clear();
         add(state);
     }

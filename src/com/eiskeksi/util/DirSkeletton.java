@@ -1,23 +1,24 @@
 package com.eiskeksi.util;
 
 import com.eiskeksi.logic.Direction;
+import com.eiskeksi.logic.Grid;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DirSkeletton {
 
-    Vector2f pos;
-    ArrayList<Vector2f> nesw;
+    Grid pos;
+    ArrayList<Grid> nesw;
     String id;
 
     boolean idle;
 
-    float r;
-    float w;
-    float h;
+    private int r;
+    private int w;
+    private int h;
 
-    public DirSkeletton(Vector2f pos, float r){
+    public DirSkeletton(Grid pos, int r){
 
         id = "CIRC";
         idle = true;
@@ -26,7 +27,7 @@ public class DirSkeletton {
         nesw = new ArrayList<>();
         initSkeletton();
     }
-    public DirSkeletton(Vector2f pos, float w, float h){
+    public DirSkeletton(Grid pos, int w, int h){
 
         id = "RECT";
         idle = true;
@@ -37,7 +38,7 @@ public class DirSkeletton {
         initSkeletton();
     }
 
-    public void setPos(Vector2f pos){
+    public void setPos(Grid pos){
 
         this.pos = pos;
         initSkeletton();
@@ -50,53 +51,53 @@ public class DirSkeletton {
 
             case("CIRC"):
                 //N
-                nesw.add(new Vector2f( pos.x, pos.y - r));
+                nesw.add(new Grid( pos.getX(), pos.getY() - r));
                 //NE
-                nesw.add(new Vector2f( pos.x + r, pos.y - r));
+                nesw.add(new Grid( pos.getX() + r, pos.getY() - r));
                 //E
-                nesw.add(new Vector2f( pos.x + r, pos.y));
+                nesw.add(new Grid( pos.getX() + r, pos.getY()));
                 //SE
-                nesw.add(new Vector2f( pos.x + r, pos.y + r));
+                nesw.add(new Grid( pos.getX() + r, pos.getY() + r));
                 //S
-                nesw.add(new Vector2f( pos.x, pos.y + r));
+                nesw.add(new Grid( pos.getX(), pos.getY() + r));
                 //SW
-                nesw.add(new Vector2f( pos.x - r, pos.y - r));
+                nesw.add(new Grid( pos.getX() - r, pos.getY() - r));
                 //W
-                nesw.add(new Vector2f( pos.x - r, pos.y));
+                nesw.add(new Grid( pos.getX() - r, pos.getY()));
                 //NW
-                nesw.add(new Vector2f( pos.x - r, pos.y + r));
+                nesw.add(new Grid( pos.getX() - r, pos.getY() + r));
                 return;
             case("RECT"):
                 //N
-                nesw.add(new Vector2f(pos.x + w/2, pos.y));
+                nesw.add(new Grid(pos.getX() + w/2, pos.getY()));
                 //NE
-                nesw.add(new Vector2f(pos.x + w, pos.y));
+                nesw.add(new Grid(pos.getX() + w, pos.getY()));
                 //E
-                nesw.add(new Vector2f(pos.x + w, pos.y + h/2));
+                nesw.add(new Grid(pos.getX() + w, pos.getY() + h/2));
                 //SE
-                nesw.add(new Vector2f(pos.x + w, pos.y + h));
+                nesw.add(new Grid(pos.getX() + w, pos.getY() + h));
                 //S
-                nesw.add(new Vector2f(pos.x + w / 2, pos.y + h));
+                nesw.add(new Grid(pos.getX() + w / 2, pos.getY() + h));
                 //SW
-                nesw.add(new Vector2f(pos.x, pos.y + h));
+                nesw.add(new Grid(pos.getX(), pos.getY() + h));
                 //W
-                nesw.add(new Vector2f(pos.x, pos.y + h/2));
+                nesw.add(new Grid(pos.getX(), pos.getY() + h/2));
                 //NW
                 nesw.add(pos);
                 return;
         }
     }
-    public Vector2f translateVec(String dir){
+    public Grid translateVec(String dir){
 
         return nesw.get(Direction.translateDir(dir));
     }
-    public ArrayList<Vector2f> getNesw(){
+    public ArrayList<Grid> getNesw(){
 
         return nesw;
     }
 
     //Routine
-    public void update(Vector2f pos){
+    public void update(Grid pos){
 
         if(!idle) {
             this.pos = pos;

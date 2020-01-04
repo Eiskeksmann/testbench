@@ -1,6 +1,7 @@
 package com.eiskeksi.graphics;
 
 import com.eiskeksi.logic.Direction;
+import com.eiskeksi.util.Constant;
 import com.eiskeksi.util.Vector2f;
 import gherkin.lexer.Ar;
 
@@ -10,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.lang.reflect.Array;
 import java.nio.Buffer;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Sprite {
 
@@ -88,6 +90,11 @@ public class Sprite {
             }
         }
 
+    }
+    public BufferedImage getRandomImage(int column){
+
+        Random r = new Random();
+        return SPRITESHEET.getSubimage(r.nextInt(7) * w, column * h, w, h);
     }
     public BufferedImage getSpriteSheet(){
         return SPRITESHEET;

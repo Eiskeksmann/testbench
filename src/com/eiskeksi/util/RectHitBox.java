@@ -1,6 +1,7 @@
 package com.eiskeksi.util;
 
 import com.eiskeksi.entitiy.Entity;
+import com.eiskeksi.logic.Grid;
 import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 import java.awt.*;
@@ -9,10 +10,11 @@ import java.util.ArrayList;
 public class RectHitBox extends HitBox {
 
     //pos is on the left top corner of the Rectangle
-    private float w;
-    private float h;
 
-    public RectHitBox(Vector2f pos, float w, float h){
+    protected int w;
+    protected int h;
+
+    public RectHitBox(Grid pos, int w, int h){
 
         super.pos = pos;
         this.w = w;
@@ -46,7 +48,7 @@ public class RectHitBox extends HitBox {
     }
 
     @Override
-    protected ArrayList<Vector2f> getCollisionPoint(String dir) {
+    protected ArrayList<Grid> getCollisionPoint(String dir) {
         super.col = super.dsk.getNesw();
         return super.col;
     }
@@ -57,13 +59,14 @@ public class RectHitBox extends HitBox {
     }
 
     @Override
-    protected Vector2f getPos() {
-        return null;
+    protected Grid getPos() {
+        return super.pos;
     }
 
     @Override
-    protected void setPos(Vector2f pos) {
+    protected void setPos(Grid pos) {
 
+        super.pos = pos;
     }
 
     @Override
@@ -88,8 +91,6 @@ public class RectHitBox extends HitBox {
             g.setColor(new Color(255,0,0));
         }
 
-        g.drawRect(((int)super.pos.x  - Constant.SCALE * Constant.SCALE / 2)/ Constant.SCALE,
-                ((int)super.pos.y  - Constant.SCALE * Constant.SCALE  / 2)/ Constant.SCALE,
-                (int)this.w, (int)this.h);
+        g.drawRect(super.pos.getX(), super.pos.getY(), this.w, this.h);
     }
 }

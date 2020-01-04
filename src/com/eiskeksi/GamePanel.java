@@ -3,13 +3,16 @@ package com.eiskeksi;
 import com.eiskeksi.util.KeyHandler;
 import com.eiskeksi.util.MouseHandler;
 import com.eiskeksi.states.GameStateManager;
+import org.xml.sax.SAXException;
 
 import javax.swing.JPanel;
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 import java.awt.Graphics;
 import java.awt.Color;
+import java.io.IOException;
 
 
 public class GamePanel extends JPanel implements Runnable{
@@ -49,7 +52,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     }
 
-    public void init() {
+    public void init() throws IOException, SAXException, ParserConfigurationException {
 
         running = true;
         img = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_ARGB);
@@ -82,9 +85,17 @@ public class GamePanel extends JPanel implements Runnable{
             //Simple way of finding FPS.
             int lastSecondTime = (int) (lastUpdateTime / 1000000000);
 
+        try {
             init();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
 
-            while (running)
+        while (running)
             {
                 double now = System.nanoTime();
                 int updateCount = 0;

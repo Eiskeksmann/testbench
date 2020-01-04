@@ -3,6 +3,7 @@ package com.eiskeksi.entitiy;
 import com.eiskeksi.graphics.Animation;
 import com.eiskeksi.graphics.Sprite;
 import com.eiskeksi.logic.Direction;
+import com.eiskeksi.logic.Grid;
 import com.eiskeksi.util.*;
 
 import java.awt.*;
@@ -12,13 +13,12 @@ public abstract class Entity {
 
     protected Sprite spr_idl;
     protected Sprite spr_mov;
-    protected Vector2f pos;
+    protected Grid pos;
     protected int size;
 
     protected Animation ani;
     protected Direction dir;
     protected RectHitBox rhb;
-    protected CircHitBox chb;
 
     protected float dx;
     protected float dy;

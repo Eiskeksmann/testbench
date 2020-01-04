@@ -1,7 +1,21 @@
 package com.eiskeksi.logic;
 
+import com.eiskeksi.graphics.Sprite;
+import com.eiskeksi.util.Constant;
 import com.eiskeksi.util.KeyHandler;
 import com.eiskeksi.util.MouseHandler;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.StringTokenizer;
 
 //CLASS DESCRIPTION
 
@@ -23,10 +37,95 @@ public class Layer {
     MouseHandler mouse;
     KeyHandler key;
 
-    public Layer(MouseHandler mouse, KeyHandler  key){
+    private File layout;
+    private DocumentBuilderFactory factory;
+    private DocumentBuilder builder;
+    private Document doc;
+    private NodeList nod;
 
-        this.mouse = mouse;
-        this.key = key;
+    private Sprite spr;
+    private String[] rows;
+    private LogicTile[][] sat;
+
+    private int size;
+    private int x;
+    private int y;
+
+    public int getX(){
+        return x;
     }
+    public int getY(){
+        return y;
+    }
+    public int getSize(){ return size;}
+    public LogicTile[][] getSat(){ return sat;}
+
+    public Layer(String path, Sprite spr) throws ParserConfigurationException, IOException, SAXException {
+
+        layout = new File(path);
+        factory = DocumentBuilderFactory.newInstance();
+        builder = factory.newDocumentBuilder();
+        doc = builder.parse(layout);
+        nod = doc.getElementsByTagName("Row");
+        this.spr = spr;
+        createStringArray();
+        createLogicTileArray();
+    }
+    private void createStringArray(){
+
+        rows = new String[nod.getLength()];
+        for(int i = 0; i < nod.getLength(); i++){
+
+            rows[i] = nod.item(i).getTextContent();
+            System.out.println("["+ i +"] :" + rows[i]);
+        }
+        this.x = rows.length;
+        this.y = rows[0].length() / 2 + 1;
+        this.size = x * y;
+        sat = new LogicTile[x][y];
+    }
+    private void createLogicTileArray(){
+
+        for(int i = 0; i < x; i++){
+            StringTokenizer tok = new StringTokenizer(rows[i],",");
+            for(int j = 0; j < y; j++){
+                switch (tok.nextToken()){
+
+                    case("0"):
+                        sat[i][j] = new Water(new Grid(j * Constant.DOUBLE_SCALE, i * Constant.DOUBLE_SCALE), spr);
+                        break;
+                    case("1"):
+                        sat[i][j] = new Ground(new Grid(j * Constant.DOUBLE_SCALE, i * Constant.DOUBLE_SCALE), spr);
+                        break;
+                    case("2"):
+                        sat[i][j] = new Mountain(new Grid(j * Constant.DOUBLE_SCALE, i * Constant.DOUBLE_SCALE), spr);
+                        break;
+                }
+            }
+        }
+
+    }
+    public void printLogicTileArray(){
+
+        for(int i = 0; i < x; i++){
+
+            String line = " | ";
+            for(int j = 0; j < y; j++){
+
+                line += sat[i][j].toString() + " | ";
+            }
+            System.out.println(line);
+        }
+    }
+    public LogicTile getLogicTile(int xat, int yat){
+
+        return sat[xat][yat];
+    }
+    public void setlogicTile(int xat, int yat, LogicTile set){
+
+        sat[xat][yat] = set;
+    }
+
+
 
 }
