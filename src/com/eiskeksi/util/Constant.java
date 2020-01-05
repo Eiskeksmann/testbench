@@ -11,7 +11,10 @@ public class Constant {
 
     public static final int SCALE = 3;
     public static final int DOUBLE_SCALE = SCALE * SCALE;
+    public static final int HALF_SCALE = SCALE / 2;
     public static final int SPR_STANDARD = SCALE * SCALE;
+
+    public static final double DSCALE = (double)SCALE;
 
     public static final int SOLX = 1920;
     public static final int SOLY = 1080;

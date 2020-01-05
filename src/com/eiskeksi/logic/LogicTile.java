@@ -16,7 +16,8 @@ public abstract class LogicTile{
     protected Random r;
     protected int val;
     protected Grid loc;
-    protected Sprite spr;
+    protected Sprite spr_sur;
+    protected Sprite spr_rhb;
     protected boolean build;
     protected boolean walk;
     protected boolean swim;
@@ -29,6 +30,9 @@ public abstract class LogicTile{
     }
     public boolean canSwim(){
         return swim;
+    }
+    public Grid getLoc(){
+        return loc;
     }
 
     public abstract void update();

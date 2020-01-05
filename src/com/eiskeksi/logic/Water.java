@@ -3,26 +3,25 @@ package com.eiskeksi.logic;
 import com.eiskeksi.graphics.Sprite;
 import com.eiskeksi.util.Constant;
 import com.eiskeksi.util.RectHitBox;
-import com.eiskeksi.util.Vector2f;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class Water extends LogicTile {
 
     private int code;
 
-    public Water(Grid loc, Sprite spr){
+    public Water(Grid loc, Sprite spr_sur, Sprite spr_rhb){
 
         super.build = false;
         super.swim = true;
         super.walk = false;
         super.loc = loc;
-        super.spr = spr;
+        super.spr_sur = spr_sur;
+        super.spr_rhb = spr_rhb;
         super.r = new Random();
         super.val = r.nextInt(Constant.SPR_COL_MAX);
-        super.rhb = new RectHitBox(new Grid(loc.getX(), loc.getY()),
+        super.rhb = new RectHitBox(spr_rhb, new Grid(loc.getX(), loc.getY()),
                 Constant.DOUBLE_SCALE, Constant.DOUBLE_SCALE);
         this.code = Constant.WATER;
     }
@@ -35,7 +34,7 @@ public class Water extends LogicTile {
     @Override
     public void render(Graphics2D g, float interpolation){
 
-        Sprite.drawSprite(g, spr, val, code, loc.getX(),
+        Sprite.drawSprite(g, spr_sur, val, code, loc.getX(),
                 loc.getY(), Constant.SPR_STANDARD, Constant.SPR_STANDARD);
         rhb.render(g, interpolation);
     }

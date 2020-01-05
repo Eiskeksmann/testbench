@@ -5,14 +5,12 @@ import com.eiskeksi.util.Constant;
 import com.eiskeksi.util.KeyHandler;
 import com.eiskeksi.util.MouseHandler;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.StringTokenizer;
@@ -44,6 +42,7 @@ public class Layer {
     private NodeList nod;
 
     private Sprite spr;
+    private Sprite spr_rhb;
     private String[] rows;
     private LogicTile[][] sat;
 
@@ -60,14 +59,17 @@ public class Layer {
     public int getSize(){ return size;}
     public LogicTile[][] getSat(){ return sat;}
 
-    public Layer(String path, Sprite spr) throws ParserConfigurationException, IOException, SAXException {
+    public Layer(String path, Sprite spr, Sprite spr_rhb) throws ParserConfigurationException,
+            IOException, SAXException {
 
-        layout = new File(path);
-        factory = DocumentBuilderFactory.newInstance();
-        builder = factory.newDocumentBuilder();
-        doc = builder.parse(layout);
-        nod = doc.getElementsByTagName("Row");
+
+        this.layout = new File(path);
+        this.factory = DocumentBuilderFactory.newInstance();
+        this.builder = factory.newDocumentBuilder();
+        this.doc = builder.parse(layout);
+        this.nod = doc.getElementsByTagName("Row");
         this.spr = spr;
+        this.spr_rhb = spr_rhb;
         createStringArray();
         createLogicTileArray();
     }
@@ -92,13 +94,16 @@ public class Layer {
                 switch (tok.nextToken()){
 
                     case("0"):
-                        sat[i][j] = new Water(new Grid(j * Constant.DOUBLE_SCALE, i * Constant.DOUBLE_SCALE), spr);
+                        sat[i][j] = new Water(new Grid(j * Constant.DOUBLE_SCALE,
+                                i * Constant.DOUBLE_SCALE), spr, spr_rhb);
                         break;
                     case("1"):
-                        sat[i][j] = new Ground(new Grid(j * Constant.DOUBLE_SCALE, i * Constant.DOUBLE_SCALE), spr);
+                        sat[i][j] = new Ground(new Grid(j * Constant.DOUBLE_SCALE,
+                                i * Constant.DOUBLE_SCALE), spr, spr_rhb);
                         break;
                     case("2"):
-                        sat[i][j] = new Mountain(new Grid(j * Constant.DOUBLE_SCALE, i * Constant.DOUBLE_SCALE), spr);
+                        sat[i][j] = new Mountain(new Grid(j * Constant.DOUBLE_SCALE,
+                                i * Constant.DOUBLE_SCALE), spr, spr_rhb);
                         break;
                 }
             }

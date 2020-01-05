@@ -14,16 +14,17 @@ public class Mountain extends LogicTile {
 
     private int code;
 
-    public Mountain(Grid loc, Sprite spr){
+    public Mountain(Grid loc, Sprite spr_sur, Sprite spr_rhb){
 
         super.build = false;
         super.swim = false;
         super.walk = true;
         super.loc = loc;
-        super.spr = spr;
+        super.spr_sur = spr_sur;
+        super.spr_rhb = spr_rhb;
         super.r = new Random();
         super.val = r.nextInt(Constant.SPR_COL_MAX);
-        super.rhb = new RectHitBox(new Grid(loc.getX(), loc.getY()),
+        super.rhb = new RectHitBox(spr_rhb, new Grid(loc.getX(), loc.getY()),
                 Constant.DOUBLE_SCALE,Constant.DOUBLE_SCALE);
         this.code = Constant.MOUNTAIN;
     }
@@ -40,7 +41,7 @@ public class Mountain extends LogicTile {
     @Override
     public void render(Graphics2D g, float interpolation){
 
-        Sprite.drawSprite(g, spr, val, code, loc.getX(),
+        Sprite.drawSprite(g, spr_sur, val, code, loc.getX(),
                 loc.getY(), Constant.SPR_STANDARD, Constant.SPR_STANDARD);
         super.rhb.render(g, interpolation);
     }

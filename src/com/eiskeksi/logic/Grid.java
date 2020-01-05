@@ -10,6 +10,11 @@ public class Grid {
 
     ArrayList<Grid> path;
 
+    public Grid(Grid loc){
+
+        this.x = loc.getX();
+        this.y = loc.getY();
+    }
     public Grid(int x, int y){
 
         this.x = x;

@@ -1,5 +1,6 @@
 package com.eiskeksi;
 
+import com.eiskeksi.util.Constant;
 import com.eiskeksi.util.KeyHandler;
 import com.eiskeksi.util.MouseHandler;
 import com.eiskeksi.states.GameStateManager;
@@ -57,7 +58,7 @@ public class GamePanel extends JPanel implements Runnable{
         running = true;
         img = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_ARGB);
         g = (Graphics2D) img.getGraphics();
-        g.scale(8.0,8.0);
+        g.scale(Constant.DOUBLE_SCALE,Constant.DOUBLE_SCALE);
         mouse = new MouseHandler(this);
         key = new KeyHandler(this);
 
@@ -86,7 +87,9 @@ public class GamePanel extends JPanel implements Runnable{
             int lastSecondTime = (int) (lastUpdateTime / 1000000000);
 
         try {
+
             init();
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SAXException e) {
@@ -163,7 +166,7 @@ public class GamePanel extends JPanel implements Runnable{
 
         if(g != null){
 
-            g.setColor(new Color(57,255,20));
+            g.setColor(new Color(57,200,250));
             g.fillRect(0, 0, this.width, this.height);
             gsm.render(g, interpolation);
         }

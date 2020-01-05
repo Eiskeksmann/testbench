@@ -1,6 +1,7 @@
 package com.eiskeksi.util;
 
 import com.eiskeksi.entitiy.Entity;
+import com.eiskeksi.graphics.Sprite;
 import com.eiskeksi.logic.Grid;
 
 import java.awt.*;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 public abstract class HitBox {
 
     protected Entity ent;
+    protected Sprite spr;
     protected Grid pos;
     protected DirSkeletton dsk;
     protected ArrayList<Grid> col;

@@ -1,11 +1,17 @@
 package com.eiskeksi.graphics;
 
+import com.eiskeksi.logic.Grid;
+import com.eiskeksi.util.Constant;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
 import java.nio.Buffer;
 
 public class Animation {
 
-    private BufferedImage[] frames;
+    private Sprite spr;
+    private Grid pos;
     private int cframe;
     private int nframes;
 
@@ -14,39 +20,27 @@ public class Animation {
 
     private int tplayed;
 
-    public Animation(BufferedImage[] frames){
+    public Animation(Sprite spr, Grid pos){
 
         tplayed = 0;
-        this.frames = frames;
+        this.pos = pos;
+        this.nframes = spr.getWidth();
+        this.spr = spr;
         initFrames();
-    }
-
-    public Animation(){
-        tplayed = 0;
     }
     public void initFrames(){
 
         cframe = 0;
         count = 0;
         tplayed = 0;
-        delay = 2;
-        nframes = frames.length;
+        delay = -1;
     }
 
     public void setDelay(int set){
         delay = set;
     }
-    public void setFrames(BufferedImage[] frames){
-        this.frames = frames;
-    }
-    public void setNframes(int set){
-        nframes = set;
-    }
-
-
     public void update(){
         if(delay == -1) return;
-
         count++;
 
         if(count == delay){
@@ -58,6 +52,11 @@ public class Animation {
             tplayed++;
         }
     }
+    public void render(Graphics2D g, float interpolation){
+
+        Sprite.drawSprite(g, spr, cframe, 0, pos.getX(), pos.getY(), Constant.SPR_STANDARD, Constant.SPR_STANDARD);
+        delay++;
+    }
     public int getDelay(){
         return delay;
     }
@@ -66,9 +65,6 @@ public class Animation {
     }
     public int getCount(){
         return count;
-    }
-    public BufferedImage getImage(){
-        return frames[cframe];
     }
     public boolean hasPlayedOnce(){
         return tplayed > 0;

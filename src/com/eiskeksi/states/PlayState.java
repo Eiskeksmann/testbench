@@ -2,6 +2,7 @@ package com.eiskeksi.states;
 import com.eiskeksi.entitiy.Carrier;
 import com.eiskeksi.entitiy.Entity;
 import com.eiskeksi.graphics.Sprite;
+import com.eiskeksi.logic.Direction;
 import com.eiskeksi.logic.Grid;
 import com.eiskeksi.logic.Layer;
 import com.eiskeksi.logic.Map;
@@ -21,6 +22,8 @@ public class PlayState extends GameState{
     private final int FONTSTANDARD = 16;
 
     private Font font;
+    private Sprite ent_rhb;
+    private Sprite til_rhb;
     private Sprite ent_idl;
     private Sprite ent_mov;
     private Sprite floor;
@@ -37,9 +40,11 @@ public class PlayState extends GameState{
         font = new Font("font/filler.png", FONTSTANDARD, FONTSTANDARD);
         ent_idl = new Sprite("sprite/carrier_idle.png", SPRITESTANDARD, SPRITESTANDARD);
         ent_mov = new Sprite("sprite/carrier_move.png", SPRITESTANDARD, SPRITESTANDARD);
+        ent_rhb = new Sprite("sprite/unit_rhb.png", SPRITESTANDARD, SPRITESTANDARD);
+        til_rhb = new Sprite("sprite/tile_rhb.png", SPRITESTANDARD, SPRITESTANDARD);
         floor = new Sprite("sprite/map.png", SPRITESTANDARD, SPRITESTANDARD);
-        raster = new Layer("C://Users/eiskeksi/IdeaProjects/Tutorial/res/map/map.xml", floor);
-        test = new Carrier(ent_idl, ent_mov, new Grid(5, 5));
+        raster = new Layer("C://Users/eiskeksi/IdeaProjects/Tutorial/res/map/map.xml", floor, til_rhb);
+        test = new Carrier(ent_idl, ent_mov, ent_rhb, raster.getSat()[5][5]);
         map = new Map(raster);
 
     }
@@ -47,6 +52,7 @@ public class PlayState extends GameState{
 
     public void update(){
 
+        test.update();
     }
     public void input(MouseHandler mouse, KeyHandler key){
 

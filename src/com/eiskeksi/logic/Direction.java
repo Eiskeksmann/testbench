@@ -57,7 +57,7 @@ public class Direction {
                 movingSE = false,
                 movingNE = false
         };
-        heading = POINT;
+        heading = WEST;
     }
     public static String P(){ return POINT;}
     public static String N(){ return NORTH;}

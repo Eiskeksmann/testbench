@@ -17,24 +17,10 @@ public class Sprite {
 
     private BufferedImage SPRITESHEET = null;
     private BufferedImage[][] spriteArray;
-    private final int TILE_SIZE = 32;
-    public int w;
-    public int h;
+    private int w;
+    private int h;
     private int wSprite;
     private int hSprite;
-
-    public Sprite(String file){
-
-        w = TILE_SIZE;
-        h = TILE_SIZE;
-
-        System.out.println("Loading" + file + "...");
-        SPRITESHEET = loadSprite(file);
-
-        wSprite = SPRITESHEET.getWidth() / w;
-        hSprite = SPRITESHEET.getHeight() / h;
-        loadSpriteArray();
-    }
 
     public Sprite(String file, int w, int h){
 
@@ -63,8 +49,8 @@ public class Sprite {
         hSprite = SPRITESHEET.getHeight() / h;
     }
 
-    public int getWidth(){ return w;}
-    public int getHeigth(){return h;}
+    public int getWidth(){ return wSprite;}
+    public int getHeigth(){return hSprite;}
 
     private BufferedImage loadSprite(String file){
 
@@ -90,11 +76,6 @@ public class Sprite {
             }
         }
 
-    }
-    public BufferedImage getRandomImage(int column){
-
-        Random r = new Random();
-        return SPRITESHEET.getSubimage(r.nextInt(7) * w, column * h, w, h);
     }
     public BufferedImage getSpriteSheet(){
         return SPRITESHEET;

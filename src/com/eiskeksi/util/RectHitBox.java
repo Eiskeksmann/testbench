@@ -1,6 +1,7 @@
 package com.eiskeksi.util;
 
 import com.eiskeksi.entitiy.Entity;
+import com.eiskeksi.graphics.Sprite;
 import com.eiskeksi.logic.Grid;
 import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
@@ -14,13 +15,15 @@ public class RectHitBox extends HitBox {
     protected int w;
     protected int h;
 
-    public RectHitBox(Grid pos, int w, int h){
+    public RectHitBox(Sprite spr, Grid pos, int w, int h){
 
+        super.spr = spr;
         super.pos = pos;
         this.w = w;
         this.h = h;
         super.dsk = new DirSkeletton(pos, this.w, this.h);
         super.col = new ArrayList<>(dsk.getNesw());
+        super.getSelected = false;
     }
 
     public RectHitBox(Entity ent){
@@ -83,14 +86,8 @@ public class RectHitBox extends HitBox {
     @Override
     public void render(Graphics2D g, float interpolation) {
 
-        if(super.isGetSelected()){
-
-            g.setColor(new Color(0,0,255));
-        }
-        else{
-            g.setColor(new Color(255,0,0));
-        }
-
-        g.drawRect(super.pos.getX(), super.pos.getY(), this.w, this.h);
+        if(super.getSelected && spr != null){
+            Sprite.drawSprite(g, spr, 0,0, super.pos.getX(), super.pos.getY(), w, h);
+        }else Sprite.drawSprite(g, spr, 0,0, super.pos.getX(), super.pos.getY(), w, h);
     }
 }
