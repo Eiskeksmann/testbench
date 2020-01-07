@@ -3,7 +3,6 @@ package com.eiskeksi.graphics;
 import com.eiskeksi.logic.Direction;
 import com.eiskeksi.util.Constant;
 import com.eiskeksi.util.Vector2f;
-import gherkin.lexer.Ar;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

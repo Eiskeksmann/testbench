@@ -28,9 +28,10 @@ public class MouseHandler implements MouseListener, MouseMotionListener, MouseWh
         return mouseB;
     }
 
-    public RayTrace2D getRay(){
+    public RayTrace2D getRayTrace2D(){
         return ray;
     }
+    public void setRayTrace2D(RayTrace2D set) { ray = set; }
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -39,8 +40,8 @@ public class MouseHandler implements MouseListener, MouseMotionListener, MouseWh
         mouseY = e.getY();
         ray = new RayTrace2D(mouseX, mouseY);
         System.out.println("Click X:" + e.getX() + "Click Y:" + e.getY());
+        System.out.println("Click X:" + e.getX() / Constant.TARGET_PIXEL + "Click Y:" + e.getY() / Constant.TARGET_PIXEL);
     }
-
     @Override
     public void mousePressed(MouseEvent e) {
 

@@ -21,6 +21,11 @@ public class Grid {
         this.y = y;
     }
 
+    public void addX(int add){ this.x += add; }
+    public void addY(int add){ this.y += add; }
+    public void subX(int sub){ this.x -= sub; }
+    public void subY(int sub){ this.y -= sub; }
+
     public int getX(){
         return this.x;
     }

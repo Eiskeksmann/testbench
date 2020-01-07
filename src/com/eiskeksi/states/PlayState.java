@@ -2,10 +2,8 @@ package com.eiskeksi.states;
 import com.eiskeksi.entitiy.Carrier;
 import com.eiskeksi.entitiy.Entity;
 import com.eiskeksi.graphics.Sprite;
-import com.eiskeksi.logic.Direction;
-import com.eiskeksi.logic.Grid;
-import com.eiskeksi.logic.Layer;
-import com.eiskeksi.logic.Map;
+import com.eiskeksi.logic.*;
+import com.eiskeksi.util.Constant;
 import com.eiskeksi.util.KeyHandler;
 import com.eiskeksi.util.MouseHandler;
 import com.eiskeksi.graphics.Font;
@@ -15,6 +13,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class PlayState extends GameState{
 
@@ -31,9 +30,6 @@ public class PlayState extends GameState{
     private Layer raster;
     private Map map;
 
-    private double mousex;
-    private double mousey;
-
     public PlayState(GameStateManager gsm) throws IOException, SAXException, ParserConfigurationException {
 
         super(gsm);
@@ -43,21 +39,19 @@ public class PlayState extends GameState{
         ent_rhb = new Sprite("sprite/unit_rhb.png", SPRITESTANDARD, SPRITESTANDARD);
         til_rhb = new Sprite("sprite/tile_rhb.png", SPRITESTANDARD, SPRITESTANDARD);
         floor = new Sprite("sprite/map.png", SPRITESTANDARD, SPRITESTANDARD);
-        raster = new Layer("C://Users/eiskeksi/IdeaProjects/Tutorial/res/map/map.xml", floor, til_rhb);
+        raster = new Layer(Constant.MAPPATH, floor, til_rhb);
         test = new Carrier(ent_idl, ent_mov, ent_rhb, raster.getSat()[5][5]);
         map = new Map(raster);
 
     }
-
-
     public void update(){
 
+        map.update();
         test.update();
     }
     public void input(MouseHandler mouse, KeyHandler key){
 
-        mousex = mouse.getX();
-        mousey = mouse.getY();
+        map.input(mouse, key);
     }
     public void render(Graphics2D g, float interpolation){
 

@@ -94,16 +94,16 @@ public class Layer {
                 switch (tok.nextToken()){
 
                     case("0"):
-                        sat[i][j] = new Water(new Grid(j * Constant.DOUBLE_SCALE,
-                                i * Constant.DOUBLE_SCALE), spr, spr_rhb);
+                        sat[i][j] = new Water(new Grid(j * Constant.SQUARED_SCALE,
+                                i * Constant.SQUARED_SCALE), spr, spr_rhb);
                         break;
                     case("1"):
-                        sat[i][j] = new Ground(new Grid(j * Constant.DOUBLE_SCALE,
-                                i * Constant.DOUBLE_SCALE), spr, spr_rhb);
+                        sat[i][j] = new Ground(new Grid(j * Constant.SQUARED_SCALE,
+                                i * Constant.SQUARED_SCALE), spr, spr_rhb);
                         break;
                     case("2"):
-                        sat[i][j] = new Mountain(new Grid(j * Constant.DOUBLE_SCALE,
-                                i * Constant.DOUBLE_SCALE), spr, spr_rhb);
+                        sat[i][j] = new Mountain(new Grid(j * Constant.SQUARED_SCALE,
+                                i * Constant.SQUARED_SCALE), spr, spr_rhb);
                         break;
                 }
             }

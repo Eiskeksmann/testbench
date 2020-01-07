@@ -14,13 +14,15 @@ public abstract class HitBox {
     protected Grid pos;
     protected DirSkeletton dsk;
     protected ArrayList<Grid> col;
-    protected boolean getSelected;
 
-    public boolean isGetSelected(){
-        return getSelected;
+    protected int edge;
+    protected boolean isSelected;
+
+    public boolean getSelected(){
+        return isSelected;
     }
-    public void setGetSelected(boolean set){
-        getSelected = set;
+    public void setSelected(boolean set){
+        isSelected = set;
     }
 
     protected abstract boolean collide(HitBox col);
@@ -28,7 +30,6 @@ public abstract class HitBox {
     protected abstract double calcPerimeter();
     protected abstract ArrayList<Grid> getCollisionPoint(String dir);
 
-    protected abstract boolean getSelected();
     protected abstract Grid getPos();
     protected abstract void setPos(Grid pos);
 

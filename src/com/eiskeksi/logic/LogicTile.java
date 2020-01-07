@@ -1,4 +1,6 @@
 package com.eiskeksi.logic;
+import com.eiskeksi.entitiy.Carrier;
+import com.eiskeksi.entitiy.Entity;
 import com.eiskeksi.graphics.Sprite;
 import com.eiskeksi.util.Constant;
 import com.eiskeksi.util.KeyHandler;
@@ -7,6 +9,7 @@ import com.eiskeksi.util.RectHitBox;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
 
@@ -21,6 +24,7 @@ public abstract class LogicTile{
     protected boolean build;
     protected boolean walk;
     protected boolean swim;
+    protected boolean isSelected;
 
     public boolean canBuild(){
         return build;
@@ -31,8 +35,14 @@ public abstract class LogicTile{
     public boolean canSwim(){
         return swim;
     }
+    public boolean getSelected(){ return isSelected; }
     public Grid getLoc(){
         return loc;
+    }
+
+    public void setSelected(boolean set){
+        rhb.setSelected(set);
+        isSelected = set;
     }
 
     public abstract void update();

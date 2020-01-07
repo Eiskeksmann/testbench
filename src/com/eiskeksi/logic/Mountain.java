@@ -3,11 +3,8 @@ package com.eiskeksi.logic;
 import com.eiskeksi.graphics.Sprite;
 import com.eiskeksi.util.Constant;
 import com.eiskeksi.util.RectHitBox;
-import com.eiskeksi.util.Vector2f;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class Mountain extends LogicTile {
@@ -24,8 +21,8 @@ public class Mountain extends LogicTile {
         super.spr_rhb = spr_rhb;
         super.r = new Random();
         super.val = r.nextInt(Constant.SPR_COL_MAX);
-        super.rhb = new RectHitBox(spr_rhb, new Grid(loc.getX(), loc.getY()),
-                Constant.DOUBLE_SCALE,Constant.DOUBLE_SCALE);
+        super.rhb = new RectHitBox(this, spr_rhb, new Grid(loc.getX(), loc.getY()),
+                Constant.SQUARED_SCALE,Constant.SQUARED_SCALE);
         this.code = Constant.MOUNTAIN;
     }
     public String toString(){
@@ -36,13 +33,14 @@ public class Mountain extends LogicTile {
     @Override
     public void update() {
 
+        rhb.setSelected(super.isSelected);
     }
 
     @Override
     public void render(Graphics2D g, float interpolation){
 
-        Sprite.drawSprite(g, spr_sur, val, code, loc.getX(),
-                loc.getY(), Constant.SPR_STANDARD, Constant.SPR_STANDARD);
+        Sprite.drawSprite(g, spr_sur, val, code, (int)loc.getX(),
+                (int)loc.getY(), Constant.SPR_STANDARD, Constant.SPR_STANDARD);
         super.rhb.render(g, interpolation);
     }
 }

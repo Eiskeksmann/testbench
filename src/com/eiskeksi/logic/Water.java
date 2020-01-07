@@ -21,8 +21,8 @@ public class Water extends LogicTile {
         super.spr_rhb = spr_rhb;
         super.r = new Random();
         super.val = r.nextInt(Constant.SPR_COL_MAX);
-        super.rhb = new RectHitBox(spr_rhb, new Grid(loc.getX(), loc.getY()),
-                Constant.DOUBLE_SCALE, Constant.DOUBLE_SCALE);
+        super.rhb = new RectHitBox(this, spr_rhb, new Grid(loc.getX(), loc.getY()),
+                Constant.SQUARED_SCALE, Constant.SQUARED_SCALE);
         this.code = Constant.WATER;
     }
     public String toString(){
@@ -42,5 +42,6 @@ public class Water extends LogicTile {
     @Override
     public void update() {
 
+        rhb.setSelected(super.isSelected);
     }
 }
