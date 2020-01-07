@@ -33,7 +33,7 @@ public class PlayState extends GameState{
     public PlayState(GameStateManager gsm) throws IOException, SAXException, ParserConfigurationException {
 
         super(gsm);
-        font = new Font("font/filler.png", FONTSTANDARD, FONTSTANDARD);
+        font = new Font("font/optimized_trans_ascii.png", FONTSTANDARD, FONTSTANDARD);
         ent_idl = new Sprite("sprite/carrier_idle.png", SPRITESTANDARD, SPRITESTANDARD);
         ent_mov = new Sprite("sprite/carrier_move.png", SPRITESTANDARD, SPRITESTANDARD);
         ent_rhb = new Sprite("sprite/unit_rhb.png", SPRITESTANDARD, SPRITESTANDARD);
@@ -56,8 +56,8 @@ public class PlayState extends GameState{
     public void render(Graphics2D g, float interpolation){
 
         map.render(g, interpolation);
-       //Font.drawArray(g, font, "test", new Vector2f(10, 10),
-               //SPRITESTANDARD, SPRITESTANDARD, 4, 0);
+       Font.drawArray(g, font, "testwert: " + Constant.SCALE, new Vector2f(10, 10),
+               SPRITESTANDARD, SPRITESTANDARD, 8, 0);
         test.render(g, interpolation);
 
 
